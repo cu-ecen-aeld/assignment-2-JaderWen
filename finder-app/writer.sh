@@ -5,6 +5,7 @@
 if [ $# -eq 2 ]
 then
   WRITEFILE=$1
+  FILEDIR=$(dirname $WRITEFILE)
   if [ -n $2 ]
   then
     WRITESTR=$2
@@ -14,6 +15,13 @@ then
   fi
 else
   echo "Please pass exactly 2 arguments"
+  exit 1
+fi
+
+mkdir -p $FILEDIR
+if [ $? -ne 0 ]
+then
+  echo "Cannot create path $FILEDIR: path not valid or write-protected"
   exit 1
 fi
 
