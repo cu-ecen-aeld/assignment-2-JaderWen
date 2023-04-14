@@ -2,6 +2,9 @@
 # finder.sh for assignment 1
 # Author: JaderWen
 
+set -u
+set -e
+
 NUMFILES=0
 NUMLINES=0
 
@@ -27,11 +30,9 @@ else
 fi
 
 read_match(){
-  NUMMATCHED=0
   if [ -r $1 ]
   then
-    NUMMATCHED=`grep -c $SEARCHSTR $1`
-    NUMLINES=`expr $NUMLINES + $NUMMATCHED`
+    NUMLINES=$(($NUMLINES + $(grep -c $SEARCHSTR $1)))
   fi
 }
 
@@ -42,7 +43,7 @@ read_dir(){
     then
       read_dir $1"/"$entry
     else
-      NUMFILES=`expr $NUMFILES + 1`
+      NUMFILES=$(($NUMFILES + 1))
       read_match $1"/"$entry
     fi
   done

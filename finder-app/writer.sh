@@ -2,6 +2,9 @@
 # writer.sh for assignment 1
 # Author: JaderWen
 
+set -u
+set -e
+
 if [ $# -eq 2 ]
 then
   WRITEFILE=$1
